@@ -1,194 +1,133 @@
-# Echoes Without Words
+# Echoes Without Words (Team-Karasuno)
 
-An abstract, interactive generative art experience that explores emotion through visuals and sound—without words.
+> **An abstract, interactive generative art and ambient sound experience exploring human emotional states through Perlin noise flow fields and Tone.js audio synthesis.**
 
-![Project Status](https://img.shields.io/badge/status-in%20development-yellow)
-![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black)
-![React](https://img.shields.io/badge/React-19.2.3-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8)
-
----
-
-## 🎨 About
-
-**Echoes Without Words** is a minimalist, emotion-driven web application that invites users to explore their feelings through abstract visuals and ambient sound. The experience is wordless, relying entirely on color, motion, and audio to create an immersive journey.
-
-### Key Features
-
-- 🌊 **Particle Flow Field System** - 500 particles moving through Perlin noise-based flow fields
-- 🎵 **Generative Audio** - Dynamic soundscapes powered by Tone.js
-- 🎭 **Emotional Palettes** - Four core emotional states (Peace, Hope, Fear, Connection)
-- ⚡ **Intensity Control** - Real-time adjustment of visual chaos and audio complexity
-- 🎨 **Premium Design** - High-end aesthetic with elegant animations
+[![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2.3-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1.18-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![p5.js](https://img.shields.io/badge/p5.js-2.1.2-ED225D?style=for-the-badge&logo=p5.js&logoColor=white)](https://p5js.org/)
+[![Tone.js](https://img.shields.io/badge/Tone.js-15.1.22-orange?style=for-the-badge)](https://tonejs.github.io/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.24.10-black?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
 
 ---
 
-## 🚀 Quick Start
+## 📌 Problem It Solves
 
-### Prerequisites
+Modern web interfaces and digital interactions are heavily text-saturated, structured around data dashboards, analytical forms, and explicit linguistic labels. Digital tools rarely offer wordless, contemplative spaces for introspective exploration or creative relaxation.
 
-- Node.js 18+ 
-- npm or yarn
+Furthermore, combining procedural mathematical graphics with dynamic procedural audio in modern single-page applications often encounters severe performance bottlenecks: canvas redraw lag, unoptimized particle loops, and audio context autoplay restrictions in standard browsers.
 
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd "Echoes Without Words"
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+**Echoes Without Words** solves this by delivering a minimalist, wordless generative art application where emotional states are expressed entirely through computational vector motion, color harmony, and procedural sound synthesis. By implementing a lightweight 500-particle vector flow field using 2D Perlin noise equations paired with dynamic Tone.js synthesizers, the platform runs smoothly at 60 FPS in standard browser windows with synchronized audio-visual feedback.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features
 
-```
-├── app/                    # Next.js App Router pages
-│   ├── login/             # Login page
-│   ├── globals.css        # Global styles
-│   └── layout.js          # Root layout
-├── components/            # React components
-│   ├── Canvas.js          # p5.js canvas wrapper
-│   ├── ControlTray.js     # UI controls
-│   └── Experience.js      # Main experience
-├── lib/                   # Core logic
-│   ├── sketch.js          # p5.js particle system
-│   └── audio.js           # Tone.js audio engine
-└── public/                # Static assets
-```
+- **Perlin Noise Particle Flow Field:** Simulates 500 autonomous particles navigating a two-dimensional Perlin vector field with edge wrapping, continuous velocity dampening, and procedural coordinate updates at 60 FPS.
+- **Dynamic Intensity Modulation (0–100 Scale):** Real-time slider controlling visual chaos and kinetic behavior:
+  - Particle speed scaling across a range of `2.0` to `24.0`
+  - Flow field force magnitude scaling from `0.5` to `4.0`
+  - Perlin noise spatial turbulence scaling from `0.05` to `0.40`
+  - Time-evolution rate ($z$-offset) accelerating up to 20× at maximum intensity
+- **Interactive Cursor Physics:** Real-time mouse and pointer interaction exerting radial repulsion forces on any particle within a 150-pixel radius.
+- **Emotion-Mapped Color Palettes:** Distinct color schemes reflecting 4 affective states:
+  - 🕊️ **Peace:** Gentle teals and cyans (`#E0F7FA` $\rightarrow$ `#26C6DA`)
+  - 🌅 **Hope:** Luminous morning yellows (`#FFFDE7` $\rightarrow$ `#FFEE58`)
+  - ⚡ **Fear:** Intense high-contrast crimsons (`#FFEBEE` $\rightarrow$ `#EF5350`)
+  - 🔮 **Connection:** Deep ethereal lavenders and purples (`#F3E5F5` $\rightarrow$ `#AB47BC`)
+- **Procedural Audio Synthesis Engine (Tone.js):** Harmonic synthesizer featuring custom Synth, Chorus, and Reverb effect chains mapped to musical scales and moods:
+  - *Peace:* Sine wave oscillator, gentle 0.8s attack / 2.0s release, C3 root note, Major Pentatonic scale (`[0, 2, 4, 7, 9]`), 60 BPM tempo.
+  - *Hope:* Triangle wave oscillator, 0.1s attack / 1.0s release, D3 root note, Lydian mode (`[0, 4, 7, 11, 12, 14]`), 80 BPM tempo.
+  - *Fear:* Sawtooth wave oscillator, sharp 0.05s attack / 0.5s release, A2 root note, Locrian/Diminished scale (`[0, 1, 3, 6, 7, 8]`), 100 BPM tempo.
+  - *Connection:* FM Synth with harmonic chords and dynamic modulation.
+- **Gesture-Activated Web Audio Context:** Dedicated entry gate overlay requiring explicit user gesture to initialize the browser audio context, adhering to modern browser autoplay policies.
+- **Slide-Out Control Tray:** Built with Framer Motion and Lucide React icons, offering non-intrusive floating controls to adjust intensity, toggle audio, and switch emotional states.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
-- **UI**: [React 19](https://react.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Generative Art**: [p5.js](https://p5js.org/)
-- **Audio**: [Tone.js](https://tonejs.github.io/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **Framework:** Next.js 16.1.1 (App Router)
+- **Library:** React 19.2.3
+- **Language:** JavaScript (ES6+ Modules)
+- **Styling:** Tailwind CSS v4.1.18
+- **Procedural Graphics:** p5.js 2.1.2 (Canvas 2D context)
+- **Web Audio Synthesis:** Tone.js 15.1.22 (PolySynth, Reverb, Chorus, Transport loop)
+- **UI Animations:** Framer Motion 12.24.10
+- **Vector Icons:** Lucide React 0.562.0
+- **Typography:** Google Fonts (Montserrat weights 100–600)
 
 ---
 
-## 🎮 Usage
+## 📸 Screenshots
 
-1. **Login Page** - Enter your credentials (currently visual only, no backend)
-2. **Entry Screen** - Click "ENTER" to begin the experience
-3. **Exploration** - Interact with the visual field:
-   - Move your mouse to repel particles
-   - Adjust the **Intensity** slider (0-100)
-   - Select a **Core Value** (Peace, Hope, Fear, Connection)
-4. **Immersion** - Let the visuals and audio guide your emotional journey
+> _Visual walkthrough of the generative particle flow field and ambient emotion controls._
+
+| Particle Flow Field (Peace / Cyan Palette) | Dynamic Control Tray & Emotion Selectors |
+| :---: | :---: |
+| ![Particle Field Placeholder](docs/screenshots/flow_field_placeholder.png)<br>_Placeholder: 500-particle Perlin noise flow field canvas_ | ![Control Tray Placeholder](docs/screenshots/control_tray_placeholder.png)<br>_Placeholder: Floating intensity slider and emotion state pills_ |
 
 ---
 
-## 🎨 Design Philosophy
+## 🚀 How to Run
 
-### Visual Language
-- **Minimalism**: No words, labels, or instructions
-- **Abstraction**: Shapes, colors, and motion convey emotion
-- **Fluidity**: Organic, continuous movement
-- **Responsiveness**: User interaction shapes the experience
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) (version 18.0.0 or higher)
+- npm, yarn, or pnpm
 
-### Color Palettes
-- **Peace**: Teals & Cyans (#E0F7FA - #26C6DA)
-- **Hope**: Warm Yellows (#FFFDE7 - #FFEE58)
-- **Fear**: Reds (#FFEBEE - #EF5350)
-- **Connection**: Purples (#F3E5F5 - #AB47BC)
-
----
-
-## 🔧 Configuration
-
-### Environment Variables
-Create a `.env.local` file for future authentication:
-
-```env
-# Add your environment variables here
-# NEXT_PUBLIC_API_URL=
-# NEXT_PUBLIC_FIREBASE_API_KEY=
-```
-
-### Tailwind Configuration
-Customize in `tailwind.config.js`:
-
-```javascript
-module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      // Add custom theme extensions
-    },
-  },
-}
-```
-
----
-
-## 📝 Scripts
+### 2. Clone Repository & Install Dependencies
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
+# Clone the repository
+git clone https://github.com/akibmehedi666/Team-Karasuno.git
+cd Team-Karasuno
+
+# Install required dependencies
+npm install
+```
+
+### 3. Start Development Server
+
+```bash
+npm run dev
+```
+
+Open your browser and navigate to: **`http://localhost:3000`**
+
+- Click **ENTER** on the landing screen to initialize the Tone.js audio engine.
+- Hover or move your cursor across the canvas to interact with particle repulsion.
+- Click the floating settings icon in the bottom corner to adjust the **Intensity** slider or switch between **Peace**, **Hope**, **Fear**, and **Connection**.
+
+### 4. Build for Production
+
+```bash
+# Create optimized production build
+npm run build
+
+# Start production server
+npm run start
 ```
 
 ---
 
-## 🐛 Known Issues
+## 📂 Project Structure
 
-- Login page is visual only (no authentication backend)
-- Audio requires user interaction to start (browser security)
-- Hydration warnings suppressed for animation components
-
----
-
-## 🚧 Roadmap
-
-- [ ] Implement authentication system
-- [ ] Add user profiles and preferences
-- [ ] Mobile optimization
-- [ ] Accessibility improvements
-- [ ] Export/screenshot functionality
-- [ ] Enhanced audio synthesis
-- [ ] Stillness detection & reflection phase
-
-See `DEVELOPER_HANDOFF.md` for detailed implementation tasks.
-
----
-
-## 📄 License
-
-[Add your license here]
-
----
-
-## 🙏 Acknowledgments
-
-- Inspired by abstract expressionism and generative art
-- Built with love for emotional exploration through technology
-
----
-
-## 📧 Contact
-
-For questions or collaboration:
-- [Add contact information]
-
----
-
-**Status**: Ready for authentication implementation  
-**Last Updated**: January 8, 2026
+```
+Team-Karasuno/
+├── app/
+│   ├── layout.js                  # Root layout with Montserrat typography
+│   ├── page.js                    # Main generative experience entrypoint
+│   ├── login/                     # Login page
+│   └── globals.css                # Global Tailwind CSS v4 styling rules
+├── components/
+│   ├── Experience.js              # Experience coordinator, audio bootstrapper, and URL state
+│   ├── Canvas.js                  # React-to-p5.js lifecycle wrapper and resize listener
+│   └── ControlTray.js             # Framer Motion animated drawer with intensity and presets
+├── lib/
+│   ├── sketch.js                  # Particle class, Perlin flow field physics, and color palettes
+│   └── audio.js                   # Tone.js synthesizer, FX chain, presets, and loop scheduler
+├── public/                        # Static icons and graphic assets
+├── DEVELOPER_HANDOFF.md           # Architecture specifications and technical handoff doc
+├── package.json                   # Dependencies and npm scripts
+└── README.md                      # Documentation
+```
